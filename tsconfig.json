@@ -1,44 +1,46 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    /* Language and Environment */
+    "target": "ES2020", // Modern async/await support, better performance
+    "module": "CommonJS", // Node.js module system
+    "lib": ["ES2020"], // Built-in features (like Promise, Map, etc.)
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
+    /* Module Resolution */
+    "rootDir": "./src", // Entry source folder
+    "outDir": "./dist", // Output build folder
+    "moduleResolution": "node", // Look for node_modules
+    "esModuleInterop": true, // Allow default import from CommonJS
+    "resolveJsonModule": true, // Allow importing JSON files
+    "allowSyntheticDefaultImports": true, // Allow `import fs from 'fs'`
+    "baseUrl": "./", // Enable relative imports from project root
+    "paths": {
+      "@controllers/*": ["src/controllers/*"],
+      "@db/*": ["src/db/*"],
+      "@routes/*": ["src/routes/*"],
+      "@dto/*": ["src/DTO/*"]
+    },
 
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
+    /* Strictness & Type Checking */
+    "strict": true, // Enable all strict type checks
+    "plugins": [{ "name": "typescript-strict-plugin" }],
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Emit Settings */
+    "sourceMap": true, // Generate .map files for debugging
+    "removeComments": true, // Clean output JS
+    "declaration": true, // Generate .d.ts type files
     "declarationMap": true,
+    "emitDecoratorMetadata": true, // If using decorators (optional)
+    "experimentalDecorators": true, // Needed for class-validator, class-transformer
 
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+    /* Interop & Consistency */
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
