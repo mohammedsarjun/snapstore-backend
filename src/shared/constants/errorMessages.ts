@@ -10,6 +10,8 @@ export const ERROR_MESSAGES = {
     PASSWORD_STRENGTH: "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character",
     PHONE_REQUIRED: "Phone number must be a valid number",
     PHONE_LENGTH: "Phone number must be between 10 and 15 digits",
+    INVALID_CREDENTIALS: "Invalid email or password",
+    USER_NOT_FOUND: "User not found",
   },
   SERVER: {
     SOMETHING_WENT_WRONG: "Something went wrong",
