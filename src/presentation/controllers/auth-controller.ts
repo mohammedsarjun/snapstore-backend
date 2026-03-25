@@ -140,6 +140,19 @@ export class AuthController {
     );
   });
 
+  getMe = asyncHandler(async (req: Request, res: Response) => {
+    if (!req.user || !req.user.email) {
+      throw new AppError(ERROR_MESSAGES.AUTH.TOKEN_MISSING, HttpStatus.UNAUTHORIZED);
+    }
+    const result = await this.authUseCase.getMe(req.user.email);
+    ApiResponse.success(
+      res,
+      HttpStatus.OK,
+      "User profile fetched",
+      result
+    );
+  });
+
   logout = asyncHandler(async (_req: Request, res: Response) => {
     res.clearCookie(AUTH_CONSTANTS.COOKIE.NAME, { path: AUTH_CONSTANTS.COOKIE.PATH });
     ApiResponse.success(res, HttpStatus.OK, "Logged out successfully", null);
