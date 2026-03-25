@@ -220,4 +220,15 @@ export class AuthUseCase {
 
     return { email: user.email };
   }
+
+  async getMe(email: string) {
+    const user = await this.userRepo.findByEmail(email);
+    if (!user) {
+      throw new AppError(ERROR_MESSAGES.USER.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
+    }
+    return {
+      userName: user.userName,
+      email: user.email,
+    };
+  }
 }
