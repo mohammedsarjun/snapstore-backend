@@ -27,7 +27,8 @@ export class UserMapper {
       doc.otp,
       doc.otpExpiry,
       doc.resetToken,
-      doc.resetTokenExpiry
+      doc.resetTokenExpiry,
+      doc._id.toString()
     );
   }
 }

@@ -14,6 +14,15 @@ import {
 } from "../validators/auth-validator";
 import AppError from "../../shared/errors/AppError";
 import { ERROR_MESSAGES } from "../../shared/constants/errorMessages";
+import { AUTH_CONSTANTS } from "../../shared/constants/authConstants";
+
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax" as const,
+  maxAge: AUTH_CONSTANTS.COOKIE.MAX_AGE,
+  path: AUTH_CONSTANTS.COOKIE.PATH,
+};
 
 export class AuthController {
   constructor(private authUseCase: AuthUseCase) {}
@@ -49,11 +58,14 @@ export class AuthController {
     }
 
     const result = await this.authUseCase.login(validation.data);
+
+    res.cookie(AUTH_CONSTANTS.COOKIE.NAME, result.token, COOKIE_OPTIONS);
+
     ApiResponse.success(
       res,
       HttpStatus.OK,
       API_RESPONSE_MESSAGES.USER.LOGIN_SUCCESSFUL,
-      result
+      { user: result.user }
     );
   });
 
@@ -66,11 +78,14 @@ export class AuthController {
     }
 
     const result = await this.authUseCase.verifyOtp(validation.data);
+
+    res.cookie(AUTH_CONSTANTS.COOKIE.NAME, result.token, COOKIE_OPTIONS);
+
     ApiResponse.success(
       res,
       HttpStatus.OK,
       API_RESPONSE_MESSAGES.USER.OTP_VERIFIED,
-      result
+      { user: result.user }
     );
   });
 
@@ -123,5 +138,10 @@ export class AuthController {
       API_RESPONSE_MESSAGES.USER.PASSWORD_RESET_SUCCESS,
       result
     );
+  });
+
+  logout = asyncHandler(async (_req: Request, res: Response) => {
+    res.clearCookie(AUTH_CONSTANTS.COOKIE.NAME, { path: AUTH_CONSTANTS.COOKIE.PATH });
+    ApiResponse.success(res, HttpStatus.OK, "Logged out successfully", null);
   });
 }

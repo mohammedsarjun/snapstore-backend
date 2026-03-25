@@ -3,6 +3,7 @@ import { ERROR_MESSAGES } from "../../shared/constants/errorMessages";
 import { HttpStatus } from "../../shared/constants/httpStatus";
 
 export class User {
+  public id: string | null;
   public userName: string;
   public email: string;
   public phoneNumber: number;
@@ -22,8 +23,10 @@ export class User {
     otp: string | null = null,
     otpExpiry: Date | null = null,
     resetToken: string | null = null,
-    resetTokenExpiry: Date | null = null
+    resetTokenExpiry: Date | null = null,
+    id: string | null = null
   ) {
+    this.id = id;
     this.userName = userName.trim();
     this.email = email.trim().toLowerCase();
     this.phoneNumber = phoneNumber;

@@ -23,6 +23,18 @@ export const ERROR_MESSAGES = {
     CONFIRM_PASSWORD_REQUIRED: "Confirm password is required",
     RESET_TOKEN_REQUIRED: "Reset token is required",
   },
+  IMAGE: {
+    NOT_FOUND: "Image not found",
+    UNAUTHORIZED: "You are not authorized to access this image",
+    TITLE_REQUIRED: "Image title is required",
+    FILE_REQUIRED: "Image file is required",
+    INVALID_FILE_TYPE: "Only image files are allowed",
+    UPLOAD_FAILED: "Failed to upload image",
+  },
+  AUTH: {
+    TOKEN_MISSING: "Authentication required",
+    TOKEN_INVALID: "Invalid or expired token",
+  },
   SERVER: {
     SOMETHING_WENT_WRONG: "Something went wrong",
   },

@@ -88,6 +88,7 @@ export class AuthUseCase {
 
     // 4. Generate JWT token
     const token = this.tokenService.generateToken({
+      id: user.id as string,
       email: user.email,
       userName: user.userName,
     });
@@ -128,6 +129,7 @@ export class AuthUseCase {
 
     // 6. Generate JWT token so user can proceed to home
     const token = this.tokenService.generateToken({
+      id: user.id as string,
       email: user.email,
       userName: user.userName,
     });
