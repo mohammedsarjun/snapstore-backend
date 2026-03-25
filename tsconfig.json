@@ -3,8 +3,13 @@
     /* Language and Environment */
     "target": "ES2020", // Modern async/await support, better performance
     "module": "CommonJS", // Node.js module system
-    "lib": ["ES2020"], // Built-in features (like Promise, Map, etc.)
-
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    "types": [
+      "node"
+    ],
     /* Module Resolution */
     "rootDir": "./src", // Entry source folder
     "outDir": "./dist", // Output build folder
@@ -14,22 +19,32 @@
     "allowSyntheticDefaultImports": true, // Allow `import fs from 'fs'`
     "baseUrl": "./", // Enable relative imports from project root
     "paths": {
-      "@controllers/*": ["src/controllers/*"],
-      "@db/*": ["src/db/*"],
-      "@routes/*": ["src/routes/*"],
-      "@dto/*": ["src/DTO/*"]
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@db/*": [
+        "src/db/*"
+      ],
+      "@routes/*": [
+        "src/routes/*"
+      ],
+      "@dto/*": [
+        "src/DTO/*"
+      ]
     },
-
     /* Strictness & Type Checking */
     "strict": true, // Enable all strict type checks
-    "plugins": [{ "name": "typescript-strict-plugin" }],
+    "plugins": [
+      {
+        "name": "typescript-strict-plugin"
+      }
+    ],
     "noImplicitAny": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-
     /* Emit Settings */
     "sourceMap": true, // Generate .map files for debugging
     "removeComments": true, // Clean output JS
@@ -37,10 +52,14 @@
     "declarationMap": true,
     "emitDecoratorMetadata": true, // If using decorators (optional)
     "experimentalDecorators": true, // Needed for class-validator, class-transformer
-
     /* Interop & Consistency */
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
