@@ -15,4 +15,30 @@ export class UserRepository implements IUserRepository {
         if (!doc) return null;
         return UserMapper.toDomain(doc);
     }
+
+    async updateOtp(email: string, otp: string, otpExpiry: Date): Promise<void> {
+        await UserModel.updateOne({ email }, { otp, otpExpiry });
+    }
+
+    async verifyUser(email: string): Promise<void> {
+        await UserModel.updateOne({ email }, { isVerified: true, otp: null, otpExpiry: null });
+    }
+
+    async updateResetToken(email: string, resetToken: string, resetTokenExpiry: Date): Promise<void> {
+        await UserModel.updateOne({ email }, { resetToken, resetTokenExpiry });
+    }
+
+    async findByResetToken(token: string): Promise<User | null> {
+        const doc = await UserModel.findOne({ resetToken: token });
+        if (!doc) return null;
+        return UserMapper.toDomain(doc);
+    }
+
+    async updatePassword(email: string, hashedPassword: string): Promise<void> {
+        await UserModel.updateOne({ email }, { password: hashedPassword });
+    }
+
+    async clearResetToken(email: string): Promise<void> {
+        await UserModel.updateOne({ email }, { resetToken: null, resetTokenExpiry: null });
+    }
 }

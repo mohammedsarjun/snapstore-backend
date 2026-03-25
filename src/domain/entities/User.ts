@@ -7,18 +7,32 @@ export class User {
   public email: string;
   public phoneNumber: number;
   public password: string;
+  public isVerified: boolean;
+  public otp: string | null;
+  public otpExpiry: Date | null;
+  public resetToken: string | null;
+  public resetTokenExpiry: Date | null;
 
   constructor(
     userName: string,
     email: string,
     phoneNumber: number,
-    password: string
+    password: string,
+    isVerified: boolean = false,
+    otp: string | null = null,
+    otpExpiry: Date | null = null,
+    resetToken: string | null = null,
+    resetTokenExpiry: Date | null = null
   ) {
-    // 🔥 Auto-clean here itself
     this.userName = userName.trim();
-    this.email = email.trim().toLowerCase(); // normalize email
+    this.email = email.trim().toLowerCase();
     this.phoneNumber = phoneNumber;
     this.password = password.trim();
+    this.isVerified = isVerified;
+    this.otp = otp;
+    this.otpExpiry = otpExpiry;
+    this.resetToken = resetToken;
+    this.resetTokenExpiry = resetTokenExpiry;
   }
 
   validate() {

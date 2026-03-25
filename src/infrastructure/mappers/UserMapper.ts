@@ -9,6 +9,11 @@ export class UserMapper {
       email: user.email,
       phoneNumber: user.phoneNumber,
       password: user.password,
+      isVerified: user.isVerified,
+      otp: user.otp,
+      otpExpiry: user.otpExpiry,
+      resetToken: user.resetToken,
+      resetTokenExpiry: user.resetTokenExpiry,
     };
   }
 
@@ -17,8 +22,12 @@ export class UserMapper {
       doc.userName,
       doc.email,
       doc.phoneNumber,
-      doc.password
+      doc.password,
+      doc.isVerified,
+      doc.otp,
+      doc.otpExpiry,
+      doc.resetToken,
+      doc.resetTokenExpiry
     );
   }
 }
-
