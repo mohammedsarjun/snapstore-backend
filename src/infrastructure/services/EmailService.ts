@@ -15,7 +15,7 @@ export class EmailService implements IEmailService {
   async sendOtpEmail(email: string, otp: string): Promise<void> {
     try {
       await this.resend.emails.send({
-        from: "SnapStore <support@snapstore.dev>", 
+        from: "snapstore@sarjun.online", 
         to: email,
         subject: "SnapStore - Email Verification OTP",
         html: `
@@ -39,7 +39,7 @@ export class EmailService implements IEmailService {
   async sendResetLinkEmail(email: string, resetLink: string): Promise<void> {
     try {
       await this.resend.emails.send({
-        from: "SnapStore <onboarding@resend.dev>",
+        from: "snapstore@sarjun.online",
         to: email,
         subject: "SnapStore - Password Reset",
         html: `
