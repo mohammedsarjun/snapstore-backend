@@ -18,7 +18,7 @@ import { AUTH_CONSTANTS } from "../../shared/constants/authConstants";
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
+  secure: true,
   sameSite: "none" as const,
   maxAge: AUTH_CONSTANTS.COOKIE.MAX_AGE,
   path: AUTH_CONSTANTS.COOKIE.PATH,
