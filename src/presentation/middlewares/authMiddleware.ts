@@ -3,7 +3,6 @@ import { ITokenService, JwtPayload } from "../../infrastructure/services/TokenSe
 import AppError from "../../shared/errors/AppError";
 import { ERROR_MESSAGES } from "../../shared/constants/errorMessages";
 import { HttpStatus } from "../../shared/constants/httpStatus";
-import { AUTH_CONSTANTS } from "../../shared/constants/authConstants";
 
 declare global {
   namespace Express {
@@ -17,7 +16,12 @@ export class AuthMiddleware {
   constructor(private tokenService: ITokenService) {}
 
   verify = (req: Request, _res: Response, next: NextFunction): void => {
-    const token = req.cookies?.[AUTH_CONSTANTS.COOKIE.NAME];
+    const authHeader = req.headers.authorization;
+    let token;
+
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
+    }
 
     if (!token) {
       throw new AppError(ERROR_MESSAGES.AUTH.TOKEN_MISSING, HttpStatus.UNAUTHORIZED);
